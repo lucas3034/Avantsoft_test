@@ -1,7 +1,8 @@
   
-![print projeto](https://github.com/lucas3034/Avantsoft_test/assets/77418656/494e62da-3682-417b-84ef-c1a7572c345d)
 
-  
+
+  ![print projeto](https://github.com/lucas3034/Avantsoft_test/assets/77418656/9a83e59d-3d33-475f-8215-bffa38ae5028)
+
                                                  ETAPAS DO PROCESSO:
                                                                                   
 1- Baixar o Php, Laravel e Composer:
@@ -33,6 +34,8 @@
 	º Depois criei um loop foreach para mostrar toda a tabela, e dentro do loop chamei as variaveis que eu criei, e dentro dela indiquei o arrey "users" da API e declarei como uma var: $user
  
 	º Em outra tabela simples chamei cada dado como um array único da da var $user que foi criada agora pouco.
+ 
+    º Para adicionar a paginação, criei uma div com um loop que utiliza algumas variaveis criadas como "perPage e "totalPages", fazendo a contagem e separando a cada 10 dados. 
  
    
 4- Estilizar a página:
