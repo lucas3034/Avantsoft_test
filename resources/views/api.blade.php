@@ -43,28 +43,43 @@
                         <div class="scale-100 p-6 bg-white dark:bg-gray-800/50 dark:bg-gradient-to-bl from-gray-700/50 via-transparent dark:ring-1 dark:ring-inset dark:ring-white/5 rounded-lg shadow-2xl shadow-gray-500/20 dark:shadow-none flex motion-safe:hover:scale-[1.01] transition-all duration-250 focus:outline focus:outline-2 focus:outline-red-500">
                             <div>
                             <table class="border-collapse">
-                                <thead>
-                                    <tr>
-                                        <th style="color: red; padding: 10px; border-right: 1px solid black;">ID</th>
-                                        <th style="color: red; padding: 10px; border-right: 1px solid black;">Name</th>
-                                        <th style="color: red; padding: 10px; border-right: 1px solid black;">Age</th>
-                                        <th style="color: red; padding: 10px; border-right: 1px solid black;">Email</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="4" style="border-bottom: 1px solid black;"></td>
-                                    </tr>
-                                    @foreach ($apiArray['users'] as $user)
-                                        <tr>
-                                            <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['id'] }}</td>
-                                            <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['name'] }}</td>
-                                            <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['age'] }}</td>
-                                            <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['email'] }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+    <thead>
+        <tr>
+            <th style="color: red; padding: 10px; border-right: 1px solid black;">ID</th>
+            <th style="color: red; padding: 10px; border-right: 1px solid black;">Name</th>
+            <th style="color: red; padding: 10px; border-right: 1px solid black;">Age</th>
+            <th style="color: red; padding: 10px; border-right: 1px solid black;">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="4" style="border-bottom: 1px solid black;"></td>
+        </tr>
+        @php
+            $perPage = 10;
+            $users = $apiArray['users'];
+            $totalUsers = count($users);
+            $totalPages = ceil($totalUsers / $perPage);
+            $currentPage = request()->input('page', 1);
+            $offset = ($currentPage - 1) * $perPage;
+            $currentPageUsers = array_slice($users, $offset, $perPage);
+        @endphp
+        @foreach ($currentPageUsers as $user)
+            <tr>
+                <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['id'] }}</td>
+                <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['name'] }}</td>
+                <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['age'] }}</td>
+                <td style="color: white; padding: 10px; border-right: 1px solid black; text-align: center;">{{ $user['email'] }}</td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+
+<div style="margin-top: 10px;">
+    @for ($i = 1; $i <= $totalPages; $i++)
+        <a href="?page={{ $i }}" style="margin-right: 5px; text-decoration: underline ; color: white;">{{ $i }}</a>
+    @endfor
+</div>
 
                             </div>
                         </div>
